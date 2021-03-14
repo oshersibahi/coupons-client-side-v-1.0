@@ -1,0 +1,19 @@
+<div class="wrapper">
+  <form class="login" [formGroup] = "form">
+    <h3>Login</h3>
+    <input id="email" name="email" type="text" placeholder="Email Address" formControlName="email"/>
+    <input id="password" name="password" type="password" placeholder="Password" formControlName="password"/>
+    <select id="clientType" name="clientType" formControlName = "clientType" title =" clientType">
+      <option selected hidden>Select Option</option>
+      <option *ngFor="let type of clientTypes|keyvalue">{{type.value}}</option>
+    </select> 
+    <button id="login" (click) = "login()" [disabled] = "form.invalid">Login</button>
+    <div *ngIf="form.invalid" class="feedback-container">
+      <div *ngIf="(email.touched || email.dirty) && email.errors?.required" class="feedback"> * Email is missing</div>
+      <div *ngIf="(email.touched || email.dirty) && email.errors?.pattern" class="feedback"> * Email is invalid</div>
+      <div *ngIf="(password.touched || password.dirty) && password.errors?.required" class="feedback"> * Password is missing</div>
+      <div *ngIf="(clientType.touched || clientType.dirty) && clientType.errors?.required" class="feedback"> * Client type is missing</div>
+    </div>
+  </form>
+</div>
+

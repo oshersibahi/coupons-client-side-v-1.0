@@ -1,0 +1,28 @@
+div > h1 {
+    padding: 5px;
+}
+
+div.form{
+    height: 90%;
+    width: 30%;
+    margin: 0;
+    padding: 0;
+}
+
+.form > form > .form-row > div.feedback-container{
+    margin-top: 40px;
+}
+
+.form-row > div .feedback{
+    color: red;
+}
+
+div.form-row{
+    margin: 0;
+    padding: 0;
+}
+
+form{
+    height:100%;
+    overflow-y:auto;
+}

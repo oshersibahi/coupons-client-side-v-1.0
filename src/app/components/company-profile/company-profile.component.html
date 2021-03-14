@@ -1,0 +1,76 @@
+<ng-template #loading>
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</ng-template>
+<ng-template #noCoupons>
+        <div class="row">
+          <h3>Company Has No Coupons</h3>
+        </div>
+        <div class="row">
+          <h4>Do you want to add some new coupons?</h4>
+          <button class="btn btn-link" routerLink="/couponsystem/company/add-coupon">Add</button>
+        </div>
+</ng-template>
+<ng-template #companyDetails>
+  <div class="container">
+    <div class="row">company - {{company.name}}</div>
+    <div class="row">email - {{company.email}}</div>
+    <div class="row">password - {{company.password}}</div>
+  </div>
+</ng-template>      
+<div >
+  <div class="row">
+    <h2>Welcome {{company.name}}</h2>
+    <button mat-icon-button [autoClose]="true" placement="right" [ngbTooltip]="companyDetails"
+    #tooltip3="ngbTooltip"><mat-icon>info</mat-icon></button>
+  </div>
+  <br>
+  <div *ngIf="coupons.length !== 0 || (coupons.length === 0 && isSorted); else noCoupons"  class="table-responsive">
+    <h3>Coupons</h3>
+    <div class="input-group">
+      <select class="custom-select" id="sortBy" name="sortBy" [formControl]="sortByFormControl">
+        <option selected hidden>choose category...</option>
+        <option *ngFor="let c of categories|keyvalue">{{c.value}}</option>
+      </select>
+      <input min="0" type="number" name="maxPrice" id="maxPrice" placeholder="max price..." [formControl] = "maxPriceFormControl">
+      <div class="input-group-append">
+        <button [disabled]="maxPriceFormControl.invalid" class="btn btn-outline-secondary" type="button" (click)="getCompanyCouponsByMaxPrice()">sort by max price</button>
+        <button [disabled]="sortByFormControl.invalid" class="btn btn-outline-secondary" type="button" (click)="getCompanyCouponsByCategtory()">sort by category</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="getAllCoupons()">reset</button>
+      </div>
+    </div>
+    <table class="table table-bordered table-hover" mdbTable bordered="true">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Image</th>
+          <th scope="col">Start</th>
+          <th scope="col">End</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Category</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Price</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr mdbTableCol *ngFor="let coupon of coupons" [ngStyle] = "isOutOfStock(coupon)">
+          <td scope="row">{{ coupon.id }}</td>
+          <td scope="row">{{ coupon.image }}</td>
+          <td scope="row">{{ coupon.startDate }}</td>
+          <td scope="row">{{ coupon.endDate }}</td>
+          <td scope="row">{{ coupon.title }}</td>
+          <td scope="row">{{ coupon.description }}</td>
+          <td scope="row">{{ coupon.category }}</td>
+          <td scope="row">{{ coupon.amount }}</td>
+          <td scope="row">{{ coupon.price }}</td>
+          <td scope="row">
+            <button mat-icon-button (click)="deleteCoupon(coupon.id)"><mat-icon>delete_outline</mat-icon></button>
+        </td> 
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

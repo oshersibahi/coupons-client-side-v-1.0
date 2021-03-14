@@ -1,0 +1,32 @@
+section{
+    height: 100%;
+    margin: 0;
+    display: grid;
+    grid-template-rows: 10.2% 85.8% 4%;
+    grid-template-columns: 20% 80%;
+    box-sizing: border-box;
+}
+
+header,
+main{
+    padding: 2em;
+}
+
+header{
+    grid-column: 1/3;
+    grid-row: 1/2;
+    border: inherit;
+}
+
+main{
+    grid-column: 1/3;
+    grid-row: 2/3;
+    border: inherit;
+}
+
+footer{
+    grid-column: 1/3;
+    grid-row: 3/4;
+    border: inherit;
+}
+

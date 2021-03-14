@@ -1,0 +1,49 @@
+<div class="wrapper">
+    <div class="row">
+        <div class="col-2">
+            <p><strong>#</strong> {{company.id}}</p>
+            <p><mat-icon>business</mat-icon> {{company.name}}</p>
+            <p><mat-icon>mail</mat-icon> {{company.email}}</p>
+            <p><mat-icon>password</mat-icon> {{company.password}}</p>
+            <button class="btn btn-primary" routerLink="/couponsystem/admin/dashboard">back</button>
+        </div>
+        <ng-template #noCoupons>
+            <div class="col-9">
+                <h1>Company Has No Coupons</h1>
+            </div>
+        </ng-template>
+        <div class="col-9" *ngIf="company.coupons?.length; else noCoupons">
+            <div class="table-responsive">
+                <h3>Coupons</h3>
+                <table class="table" mdbTable bordered="true">
+                    <thead>
+                       <tr>
+                           <th scope="col">#</th>
+                           <th scope="col">Image</th>
+                           <th scope="col">Start</th>
+                           <th scope="col">End</th>
+                           <th scope="col">Title</th>
+                           <th scope="col">Description</th>
+                           <th scope="col">Category</th>
+                           <th scope="col">Amount</th>
+                           <th scope="col">Price</th>
+                       </tr> 
+                    </thead>
+                    <tbody>
+                        <tr mdbTableCol *ngFor="let coupon of company.coupons">
+                           <td scope="row">{{coupon.id}}</td> 
+                           <td scope="row">{{coupon.image}}</td> 
+                           <td scope="row">{{coupon.startDate}}</td> 
+                           <td scope="row">{{coupon.endDate}}</td> 
+                           <td scope="row">{{coupon.title}}</td> 
+                           <td scope="row">{{coupon.description}}</td> 
+                           <td scope="row">{{coupon.category}}</td> 
+                           <td scope="row">{{coupon.amount}}</td> 
+                           <td scope="row">{{coupon.price}}</td> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

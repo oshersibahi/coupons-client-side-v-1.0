@@ -1,0 +1,63 @@
+<div class="wrapper">
+    <div class="row">
+        <div class="col-2">
+            <p><strong>#</strong> {{customer.id}}</p>
+            <p><strong>First name </strong>{{customer.firstName}}</p>
+            <p><strong>Last name </strong>{{customer.lastName}}</p>
+            <p><mat-icon>email</mat-icon> {{customer.email}}</p>
+            <p><mat-icon>password</mat-icon> {{customer.password}}</p>
+            <button *ngIf="isAdmin" class="btn btn-primary"  routerLink="/couponsystem/admin/dashboard">back</button>
+            <button *ngIf="!isAdmin" class="btn btn-primary"  routerLink="/couponsystem/customer/shop">back</button>
+        </div>
+        <ng-template #noCoupons>
+            <div class="col-9">
+                <h1>Customer Has No Coupons</h1>
+            </div>
+        </ng-template>
+        <div class="col-9" *ngIf="customer.coupons.length !== 0 || (customer.coupons.length===0 && isSorted); else noCoupons">
+            <div class="table-responsive">
+                <h3>Coupons</h3>
+                <div *ngIf="!isAdmin" class="input-group">
+                    <select class="custom-select" id="category" name="category" [formControl]="categoryFormControl">
+                      <option selected hidden>choose category...</option>
+                      <option *ngFor="let c of categories|keyvalue">{{c.value}}</option>
+                    </select>
+                    <input min="0" type="number" name="maxPrice" id="maxPrice" placeholder="max price..." [formControl] = "maxPriceFormControl">
+                    <div class="input-group-append">
+                      <button [disabled]="maxPriceFormControl.invalid" class="btn btn-outline-secondary" type="button" (click)="getCustomerCouponsByMaxPrice()">sort by max price</button>
+                      <button [disabled]="categoryFormControl.invalid" class="btn btn-outline-secondary" type="button" (click)="getCustomerCouponsByCategory()">sort by category</button>
+                      <button class="btn btn-outline-secondary" type="button" (click)="getCustomerCoupons()">reset</button>
+                    </div>
+                </div>
+                <table class="table" mdbTable bordered="true">
+                    <thead>
+                       <tr>
+                           <th scope="col">#</th>
+                           <th scope="col">Image</th>
+                           <th scope="col">Start</th>
+                           <th scope="col">End</th>
+                           <th scope="col">Title</th>
+                           <th scope="col">Description</th>
+                           <th scope="col">Category</th>
+                           <th *ngIf="isAdmin" scope="col">Amount</th>
+                           <th scope="col">Price</th>
+                       </tr> 
+                    </thead>
+                    <tbody>
+                        <tr mdbTableCol *ngFor="let coupon of customer.coupons">
+                           <td scope="row">{{coupon.id}}</td> 
+                           <td scope="row">{{coupon.image}}</td> 
+                           <td scope="row">{{coupon.startDate}}</td> 
+                           <td scope="row">{{coupon.endDate}}</td> 
+                           <td scope="row">{{coupon.title}}</td> 
+                           <td scope="row">{{coupon.description}}</td> 
+                           <td scope="row">{{coupon.category}}</td> 
+                           <td *ngIf="isAdmin" scope="row">{{coupon.amount}}</td> 
+                           <td scope="row">{{coupon.price}}</td> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+div{
+    width: 500px;
+}
+div .form{
+    width: 500px;
+}
+
+#odd-strong {
+    color: #007bff;
+}
+
+section{
+    padding: 2em;
+}
+
+.feedback-container{
+    padding: .5em;
+    font-size: 14px;
+    color: red;
+}

@@ -1,0 +1,10 @@
+div.card {
+    display: inline-block;
+    width: 300px;
+    margin-right: 80px;
+}
+
+p{
+    height: 130px;
+    overflow: hidden;
+}

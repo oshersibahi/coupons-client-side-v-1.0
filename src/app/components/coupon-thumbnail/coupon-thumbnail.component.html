@@ -1,0 +1,13 @@
+<div class="card border-0 transform-on-hover">
+  <div class="lightbox"><img width="120px" height="250px" src="assets/pics/pexels-karolina-grabowska-5650023 (1).jpg" alt="" class="card-img-top" /></div>
+  <h6 class="text-muted card-text">img-src: {{coupon.image}}</h6>
+    <div class="card-body">
+      <h4>{{coupon.title}} <span *ngIf="coupon.amount==0" [ngStyle]="{'color': 'red'}">SOLD OUT</span></h4>
+      <h6>category: {{coupon.category}}</h6>
+      <h6>company: {{coupon.company.name}}</h6>
+      <h6>start: {{coupon.startDate}}</h6>
+      <h6>end: {{coupon.endDate}}</h6>
+      <h6>Price: {{coupon.price}}</h6>
+      <p class="text-muted card-text">{{coupon.description}}</p>
+    </div>
+  </div>
